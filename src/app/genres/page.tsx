@@ -2,8 +2,8 @@ import 'server-only'
 
 import Link from 'next/link'
 
-import { prisma } from '@/lib/db'
 import { Button } from '@/components/ui/button'
+import { prisma } from '@/lib/db'
 
 export default async function GenresPage() {
   const genres = await prisma.genre.findMany({

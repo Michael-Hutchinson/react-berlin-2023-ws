@@ -1,12 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { ReactNode, Suspense } from 'react'
 import { useShoppingCart } from './shopping-cart'
-import { GenreSelector } from './genre-selector'
+import { ChevronsUpDown } from 'lucide-react'
 
-export function MainNav() {
+type Props = {
+  genreSelector: ReactNode
+}
+
+export function MainNav({ genreSelector }: Props) {
   const { itemCount, checkout } = useShoppingCart()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -36,7 +43,20 @@ export function MainNav() {
             </Link>
           )
         })}
-        <GenreSelector />
+        <Suspense
+          fallback={
+            <Button
+              variant="outline"
+              className="w-[200px] justify-between text-foreground/60"
+              disabled
+            >
+              Movies by genre...
+              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          }
+        >
+          {genreSelector}
+        </Suspense>
 
         <Link
           href="/genres"

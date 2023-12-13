@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+'use client'
+
+import { Genre } from '@prisma/client'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Genre } from '@prisma/client'
+import { useState } from 'react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command'
 import {
@@ -11,9 +12,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
-export function GenreSelector() {
-  const [genres, setGenres] = useState<Genre[]>([])
+type Props = {
+  genres: Genre[]
+}
+
+export function GenreSelector({ genres }: Props) {
   const [open, setOpen] = useState(false)
   const searchParams = useSearchParams()
   const selectedGenre = searchParams?.get('genre') ?? ''
@@ -22,16 +27,6 @@ export function GenreSelector() {
     value: genre.id.toString(),
     label: genre.name,
   }))
-
-  useEffect(() => {
-    async function fetchGenres() {
-      const rsp = await fetch('/api/genres')
-      const genres = await rsp.json()
-      setGenres(genres)
-    }
-
-    fetchGenres()
-  }, [])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
