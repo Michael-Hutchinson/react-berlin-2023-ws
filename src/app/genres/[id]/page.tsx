@@ -1,11 +1,7 @@
 import 'server-only'
 
-import { prisma } from '@/lib/db'
 import { GenreForm } from '@/components/genre-form'
-import { saveGenre } from '@/server/save-genre'
-import { Genre } from '@prisma/client'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { prisma } from '@/lib/db'
 
 type Props = {
   params: {
@@ -13,7 +9,7 @@ type Props = {
   }
 }
 
-async function GenrePage({ params: { id } }: Props) {
+async function GenrePage({ params: { id } }: Readonly<Props>) {
   const genre = await prisma.genre.findFirstOrThrow({
     where: { id: +id },
   })

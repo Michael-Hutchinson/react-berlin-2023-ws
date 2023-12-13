@@ -2,9 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { Genre } from '@prisma/client'
 
-import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
 import {
   Card,
   CardContent,
@@ -13,13 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import { saveGenre } from '@/server/save-genre'
 
 type Props = {
   genre: Genre
 }
 
-export function GenreForm({ genre }: Props) {
+export function GenreForm({ genre }: Readonly<Props>) {
   const onSubmit = async (formData: FormData) => {
     'use server'
 

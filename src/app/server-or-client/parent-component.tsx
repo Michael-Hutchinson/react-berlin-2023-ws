@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from 'react'
 
-export function ParentComponent({ children }: PropsWithChildren) {
+export function ParentComponent({ children }: Readonly<PropsWithChildren>) {
   console.log('Rendering Parent Component')
 
   return (
@@ -10,6 +10,7 @@ export function ParentComponent({ children }: PropsWithChildren) {
       <h2
         className="my-6 text-4xl font-bold"
         onClick={() => console.log('Click')}
+        onKeyDown={(e) => e.key === 'Enter' && console.log('Enter')}
       >
         Parent Component
       </h2>

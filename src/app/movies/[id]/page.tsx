@@ -1,8 +1,5 @@
-import React, { FC } from 'react'
-
 import { MovieForm } from '@/components/movie-form'
 import { prisma } from '@/lib/db'
-import { sleep } from '@/lib/utils'
 
 type Props = {
   params: {
@@ -10,11 +7,7 @@ type Props = {
   }
 }
 
-export const dynamic = 'force-dynamic'
-
 async function getMovie(id: string) {
-  // await sleep(1_000)
-
   const movie = await prisma.movie.findFirstOrThrow({
     where: { id: +id },
   })
@@ -22,16 +15,8 @@ async function getMovie(id: string) {
   return movie
 }
 
-const MoviePage: FC<Props> = async ({ params: { id } }) => {
+const MoviePage = async ({ params: { id } }: Props) => {
   const movie = await getMovie(id)
-
-  if (!movie) {
-    return (
-      <main className="flex flex-grow items-center justify-center">
-        Loading movie ...
-      </main>
-    )
-  }
 
   return (
     <main className="flex-1 space-y-4 p-8 pt-6">

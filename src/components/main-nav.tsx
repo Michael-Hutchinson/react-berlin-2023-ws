@@ -1,19 +1,19 @@
 'use client'
 
-import { ReactNode, Suspense } from 'react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { ChevronsUpDown, RotateCw } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
+import { ReactNode, Suspense } from 'react'
 import { useShoppingCart } from './shopping-cart'
 
 type Props = {
   genreSelector: ReactNode
 }
 
-export function MainNav({ genreSelector }: Props) {
+export function MainNav({ genreSelector }: Readonly<Props>) {
   const { itemCount, checkout } = useShoppingCart()
   const pathname = usePathname()
   const searchParams = useSearchParams()

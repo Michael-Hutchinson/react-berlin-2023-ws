@@ -1,11 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Genre } from '@prisma/client'
 import { Check, ChevronsUpDown } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Genre } from '@prisma/client'
+import { useState } from 'react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Command, CommandGroup, CommandItem } from '@/components/ui/command'
 import {
@@ -13,12 +12,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 
 type Props = {
   genres: Genre[]
 }
 
-export function GenreSelector({ genres }: Props) {
+export function GenreSelector({ genres }: Readonly<Props>) {
   const [open, setOpen] = useState(false)
   const searchParams = useSearchParams()
   const selectedGenre = searchParams?.get('genre') ?? ''

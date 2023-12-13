@@ -22,7 +22,9 @@ const ShoppingCartContext = createContext({
 export const useShoppingCart = () => {
   return useContext(ShoppingCartContext)
 }
-export function ShoppingCartProvider({ children }: PropsWithChildren) {
+export function ShoppingCartProvider({
+  children,
+}: Readonly<PropsWithChildren>) {
   const [checkoutOpen, setCheckoutOpen] = useState(false)
   const [movies, setMovies] = useState<ShoppingCartMovies>([])
 
