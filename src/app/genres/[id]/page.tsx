@@ -9,7 +9,7 @@ type Props = {
   }
 }
 
-async function GenrePage({ params: { id } }: Props) {
+async function GenrePage({ params: { id } }: Readonly<Props>) {
   const genre = await prisma.genre.findFirstOrThrow({
     where: { id: +id },
   })

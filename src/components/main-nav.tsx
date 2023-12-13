@@ -13,7 +13,7 @@ type Props = {
   genreSelector: ReactNode
 }
 
-export function MainNav({ genreSelector }: Props) {
+export function MainNav({ genreSelector }: Readonly<Props>) {
   const { itemCount, checkout } = useShoppingCart()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -43,6 +43,7 @@ export function MainNav({ genreSelector }: Props) {
             </Link>
           )
         })}
+
         <Suspense
           fallback={
             <Button
