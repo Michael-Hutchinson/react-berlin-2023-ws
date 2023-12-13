@@ -21,7 +21,7 @@ async function getMovies(genreId: string | undefined) {
     backdropPath: true,
     voteAverage: true,
     voteCount: true,
-  }
+  } satisfies Prisma.MovieSelect
 
   if (genreId) {
     const genre = await prisma.genre.findFirst({
