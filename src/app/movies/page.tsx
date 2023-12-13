@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { Movie } from '@prisma/client'
 
 import { MovieCard } from '@/components/movie-card'
@@ -11,21 +8,10 @@ type Props = {
   }
 }
 
-export default function MoviesPage({
-  searchParams: { genre },
-}: Readonly<Props>) {
-  const [movies, setMovies] = useState<Movie[]>([])
-
-  useEffect(() => {
-    async function fetchMovies() {
-      const url = genre ? `/api/movies?genre=${genre}` : '/api/movies'
-      const rsp = await fetch(url)
-      const movies = await rsp.json()
-      setMovies(movies)
-    }
-
-    fetchMovies()
-  }, [genre])
+const MoviesPage = async ({ searchParams: { genre } }: Readonly<Props>) => {
+  const url = genre ? `/api/movies?genre=${genre}` : '/api/movies'
+  const rsp = await fetch(`http://localhost:3000${url}`)
+  const movies: Movie[] = await rsp.json()
 
   return (
     <main className="flex-1 space-y-4 p-8 pt-6">
@@ -38,3 +24,5 @@ export default function MoviesPage({
     </main>
   )
 }
+
+export default MoviesPage

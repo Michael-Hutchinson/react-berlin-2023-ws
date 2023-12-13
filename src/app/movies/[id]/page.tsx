@@ -1,6 +1,4 @@
-'use client'
-
-import React, { FC, useEffect, useState } from 'react'
+import React from 'react'
 
 import { MovieForm } from '@/components/movie-form'
 import { Movie } from '@prisma/client'
@@ -11,18 +9,9 @@ type Props = {
   }
 }
 
-const MoviePage: FC<Props> = ({ params: { id } }) => {
-  const [movie, setMovie] = useState<Movie | null>(null)
-
-  useEffect(() => {
-    async function fetchMovie() {
-      const rsp = await fetch(`/api/movies/${id}`)
-      const movie = await rsp.json()
-      setMovie(movie)
-    }
-
-    fetchMovie()
-  }, [id])
+const MoviePage = async ({ params: { id } }: Props) => {
+  const rsp = await fetch(`http://localhost:3000/api/movies/${id}`)
+  const movie: Movie = await rsp.json()
 
   if (!movie) {
     return (
