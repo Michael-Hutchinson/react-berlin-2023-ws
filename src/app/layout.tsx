@@ -12,7 +12,7 @@ import { ShoppingCartProvider } from '@/components/shopping-cart'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({ children }: PropsWithChildren) {
+export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <html lang="en">
       <body

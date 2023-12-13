@@ -20,7 +20,7 @@ type Props = {
   genre: Genre
 }
 
-export function GenreForm({ genre }: Props) {
+export function GenreForm({ genre }: Readonly<Props>) {
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault()
 

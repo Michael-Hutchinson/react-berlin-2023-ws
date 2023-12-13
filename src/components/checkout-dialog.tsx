@@ -39,7 +39,7 @@ export function CheckoutDialog({
   setCheckoutOpen,
   clearCart,
   movies,
-}: Props) {
+}: Readonly<Props>) {
   const totalAmount = movies.length * 9.99
   const { toast } = useToast()
   const form = useForm<CheckoutForm>({

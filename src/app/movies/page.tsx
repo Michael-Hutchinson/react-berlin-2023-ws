@@ -11,7 +11,9 @@ type Props = {
   }
 }
 
-export default function MoviesPage({ searchParams: { genre } }: Props) {
+export default function MoviesPage({
+  searchParams: { genre },
+}: Readonly<Props>) {
   const [movies, setMovies] = useState<Movie[]>([])
 
   useEffect(() => {
