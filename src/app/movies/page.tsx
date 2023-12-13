@@ -14,11 +14,21 @@ async function getMovies(genreId: string | undefined) {
     voteAverage: 'desc',
   } as const
 
+  const select = {
+    id: true,
+    title: true,
+    overview: true,
+    backdropPath: true,
+    voteAverage: true,
+    voteCount: true,
+  }
+
   if (genreId) {
     const genre = await prisma.genre.findFirst({
       where: { id: +genreId },
       include: {
         movies: {
+          select,
           orderBy,
         },
       },
@@ -28,6 +38,7 @@ async function getMovies(genreId: string | undefined) {
   } else {
     const movies = await prisma.movie.findMany({
       orderBy,
+      select,
     })
 
     return movies
