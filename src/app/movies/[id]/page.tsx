@@ -7,8 +7,6 @@ type Props = {
   }
 }
 
-export const dynamic = 'force-dynamic'
-
 async function getMovie(id: string) {
   const movie = await prisma.movie.findFirstOrThrow({
     where: { id: +id },

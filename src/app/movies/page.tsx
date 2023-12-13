@@ -9,8 +9,6 @@ type Props = {
   }
 }
 
-export const dynamic = 'force-dynamic'
-
 async function getMovies(genreId: string | undefined) {
   const orderBy: Prisma.MovieOrderByWithRelationInput = {
     voteAverage: 'desc',
